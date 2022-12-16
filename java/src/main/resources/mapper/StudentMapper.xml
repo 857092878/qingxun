@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ustb.evaluation.mod06.mapper.StudentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ustb.evaluation.mod06.pojo.Student">
+        <id column="id" property="id"/>
+        <result column="fstudent_id" property="fstudentId"/>
+        <result column="fcode" property="fcode"/>
+        <result column="fname" property="fname"/>
+        <result column="fgender" property="fgender"/>
+        <result column="fmobile" property="fmobile"/>
+        <result column="fcontact" property="fcontact"/>
+        <result column="faddress" property="faddress"/>
+        <result column="ffather_name" property="ffatherName"/>
+        <result column="ffather_mobile" property="ffatherMobile"/>
+        <result column="ffather_memo" property="ffatherMemo"/>
+        <result column="fid_code" property="fidCode"/>
+        <result column="fpolitics_id" property="fpoliticsId"/>
+        <result column="fclass_role_id" property="fclassRoleId"/>
+        <result column="fnationality_id" property="fnationalityId"/>
+        <result column="memo" property="memo"/>
+    </resultMap>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="StudentVO" type="com.ustb.evaluation.mod06.VO.StudentVO">
+        <id column="id" property="id"/>
+<!--        <result column="fstudent_id" property="fstudentId"/>-->
+        <result column="fcode" property="fcode"/>
+        <result column="fname" property="fname"/>
+        <result column="fgender" property="fgender"/>
+        <result column="fmobile" property="fmobile"/>
+        <result column="fcontact" property="fcontact"/>
+        <result column="faddress" property="faddress"/>
+        <result column="ffather_name" property="ffatherName"/>
+        <result column="ffather_mobile" property="ffatherMobile"/>
+        <result column="ffather_memo" property="ffatherMemo"/>
+        <result column="fid_code" property="fidCode"/>
+        <result column="fpolitics_id" property="fpoliticsId"/>
+        <result column="fclass_role_id" property="fclassRoleId"/>
+        <result column="fnationality_id" property="fnationalityId"/>
+        <result column="memo" property="memo"/>
+
+        <result column="fname1" property="fname1"/>
+        <result column="class_role_name" property="classRoleName"/>
+        <result column="fnationality_name" property="fnationalityName"/>
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , fcode, fname, fgender, fmobile, fcontact, faddress, ffather_name, ffather_mobile, ffather_memo, fid_code, fpolitics_id, fclass_role_id, fnationality_id, memo
+    </sql>
+
+    <!--    List<StudentVO> selectStudent();-->
+    <select id="selectStudent" resultMap="StudentVO">
+        select a.id,
+               a.fcode,
+               a.fname,
+               a.fgender,
+               a.fmobile,
+               a.fcontact,
+               a.faddress,
+               a.ffather_name,
+               a.ffather_mobile,
+               a.ffather_memo,
+               a.fid_code,
+               a.fpolitics_id,
+               a.fclass_role_id,
+               a.fnationality_id,
+               a.memo,
+               b.fname fname1,
+               c.class_role_name,
+               d.fnationality_name
+        from stu_student a
+                 left join dic_politics b
+                           on a.fpolitics_id = b.fcode
+                 left join dic_classrole c
+                           on a.fclass_role_id = c.fclass_role_id
+                 left join dic_nationality d
+                           on a.fnationality_id = d.fnationality_id
+    </select>
+    <!--    List<StudentVO> searchStudent(String search);-->
+    <select id="searchStudent" resultMap="StudentVO">
+        select a.id,
+               a.fcode,
+               a.fname,
+               a.fgender,
+               a.fmobile,
+               a.fcontact,
+               a.faddress,
+               a.ffather_name,
+               a.ffather_mobile,
+               a.ffather_memo,
+               a.fid_code,
+               a.fpolitics_id,
+               a.fclass_role_id,
+               a.fnationality_id,
+               a.memo,
+            b.fname fname1,
+            c.class_role_name,
+            d.fnationality_name
+        from stu_student a
+                 left join dic_politics b
+                           on a.fpolitics_id = b.fcode
+                 left join dic_classrole c
+                           on a.fclass_role_id = c.fclass_role_id
+                 left join dic_nationality d
+                           on a.fnationality_id = d.fnationality_id
+        where a.fcode like %#{search}%
+    </select>
+</mapper>
+

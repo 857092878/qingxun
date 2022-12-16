@@ -1,0 +1,32 @@
+{
+    "common": {
+        "home": "Home",
+        "login": "Login",
+        "logout": "Logout",
+        "doc": "Document",
+        "blog": "Blog",
+        "projectRepo": "Project",
+        "myMsg": "My Message",
+        "config": "Config",
+        "backup": "Backup",  
+        "restore": "Restore",  
+        "backupRestore": "Backup Restore",  
+        "versionName": "Version",  
+        "exit": "Exit"
+    },
+    "action": {
+        "operation": "Operation",
+        "add": "Add",
+        "edit": "Edit",
+        "delete": "Delete",
+        "refresh":"Refresh",
+        "batchDelete": "Batch Delete",
+        "search": "Search",
+        "loading": "loading",
+        "submit": "Submit",
+        "comfirm": "Comfirm",
+        "cancel": "Cancel",
+        "reset": "Reset",
+        "complexSearch":"complexSearch"
+    }
+}

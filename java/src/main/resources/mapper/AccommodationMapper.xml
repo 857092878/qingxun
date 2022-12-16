@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ustb.evaluation.mod06.mapper.AccommodationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ustb.evaluation.mod06.pojo.Accommodation">
+        <id column="fstudent_id" property="fstudentId"/>
+        <result column="fdormitory_id" property="fdormitoryId"/>
+        <result column="fbed" property="fbed"/>
+        <result column="fin" property="fin"/>
+        <result column="memo" property="memo"/>
+    </resultMap>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="AccommodationVO" type="com.ustb.evaluation.mod06.VO.AccommodationVO">
+        <id column="id" property="id"/>
+        <result column="fstudent_id" property="fstudentId"/>
+        <result column="fdormitory_id" property="fdormitoryId"/>
+        <result column="fbed" property="fbed"/>
+        <result column="fin" property="fin"/>
+        <result column="memo" property="memo"/>
+
+        <result column="fname" property="fname"/>
+        <result column="fcode" property="fcode"/>
+
+        <result column="fcode1" property="fcode1"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        afstudent_id
+        , fdormitory_id, fbed, fin, memo
+    </sql>
+
+    <sql id="AccommodationVO_List">
+        fstudent_id
+        , fdormitory_id, fbed, fin, memo, fname, fcode
+    </sql>
+    <!--List<AccommodationVO> selectAccondation(String search);-->
+    <select id="selectAccondation" resultMap="AccommodationVO">
+        select a.id,
+               a.fstudent_id,
+               a.fdormitory_id,
+               a.fbed,
+               a.fin,
+               a.memo,
+               b.fname,
+               b.fcode,
+               c.fcode fcode1
+        from stu_accommodation a
+                 left join stu_student b
+                           on a.fstudent_id = b.id
+                 left join stu_dormitory c
+                           on a.fdormitory_id = c.id
+    </select>
+
+    <!--List<AccommodationVO> searchAccondation(String search);-->
+    <select id="searchAccondation" resultMap="AccommodationVO">
+        select a.id,
+               a.fstudent_id,
+               a.fdormitory_id,
+               a.fbed,
+               a.fin,
+               a.memo,
+               b.fname,
+               b.fcode,
+               c.fcode fcode1
+        from stu_accommodation a
+                 left join stu_student b
+                           on a.fstudent_id = b.id
+                 left join stu_dormitory c
+                           on a.fdormitory_id = c.id
+        where b.fname like %#{search}%
+    </select>
+
+
+</mapper>

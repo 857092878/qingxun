@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ustb.evaluation.mod06.mapper.ClassroleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ustb.evaluation.mod06.pojo.Classrole">
+        <id column="fclass_role_id" property="fclassRoleId" />
+        <result column="class_role_name" property="classRoleName" />
+        <result column="memo" property="memo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        fclassRoleId, classRoleName, memo
+    </sql>
+
+</mapper>

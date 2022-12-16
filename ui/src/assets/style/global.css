@@ -1,0 +1,41 @@
+
+.el-dialog{
+    margin:0 auto;
+    padding:0px;
+    border-radius: 10px !important;
+    /* border:1px solid rgb(220, 223,230); */
+}
+
+/*  此处统一设置对话框的相关属性 */
+.el-dialog__header {
+  margin: 0px 0px 20px 0px;
+  padding: 15px 50px 10px 30px !important;
+  text-align: left;
+ background-color: rgb(204,208,217);
+ border-radius: 10px 10px 0px 0px!important;
+}
+
+.el-dialog__body {
+  margin: 0px;
+  padding: 0 20px!important;
+  border-bottom: 1px solid rgb(220, 223,230);
+}
+
+.el-dialog__footer {
+  padding: 10px 50px 10px 0px  !important;
+  margin: 0px;
+}
+
+.el-dialog__header .el-dialog__headerbtn i{
+    color: white;
+  }
+
+
+  .el-table td ,.el-table th{
+      padding:1px !important;
+      margin:0px;
+  }
+
+
+
+  

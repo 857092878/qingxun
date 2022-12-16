@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ustb.evaluation.mod06.mapper.AcidMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ustb.evaluation.mod06.pojo.Acid">
+        <id column="id" property="id"/>
+        <result column="fstudent_id" property="fstudentId"/>
+        <result column="fsample_time" property="fsampleTime"/>
+        <result column="ftest_time" property="ftestTime"/>
+        <result column="ftest_unit" property="ftestUnit"/>
+        <result column="fresult" property="fresult"/>
+        <result column="ftest_address" property="ftestAddress"/>
+        <result column="memo" property="memo"/>
+    </resultMap>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="AcidVO" type="com.ustb.evaluation.mod06.VO.AcidVO">
+        <id column="id" property="id"/>
+        <result column="fstudent_id" property="fstudentId"/>
+        <result column="fsample_time" property="fsampleTime"/>
+        <result column="ftest_time" property="ftestTime"/>
+        <result column="ftest_unit" property="ftestUnit"/>
+        <result column="fresult" property="fresult"/>
+        <result column="ftest_address" property="ftestAddress"/>
+        <result column="memo" property="memo"/>
+
+        <result column="fname" property="fname"/>
+        <result column="fcode" property="fcode"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , fstudent_id, fsample_time, ftest_time, ftest_unit, fresult, ftest_address, memo
+    </sql>
+    <!--List<AcidVO> selectAcid();-->
+    <select id="selectAcid" resultMap="AcidVO">
+        select a.id,
+               a.fstudent_id,
+               a.fsample_time,
+               a.ftest_time,
+               a.ftest_unit,
+               a.fresult,
+               a.ftest_address,
+               a.memo,
+               b.fname,
+               b.fcode
+        from stu_acid a
+                 left join stu_student b
+                           on a.fstudent_id = b.id
+    </select>
+    <!--List<AcidVO> searchAcid();-->
+    <select id="searchAcid" resultMap="AcidVO">
+        select a.id,
+               a.fstudent_id,
+               a.fsample_time,
+               a.ftest_time,
+               a.ftest_unit,
+               a.fresult,
+               a.ftest_address,
+               a.memo,
+               b.fname,
+               b.fcode
+        from stu_acid a
+                 left join stu_student b
+                           on a.fstudent_id = b.id
+        where b.fname like %#{search}%
+    </select>
+
+</mapper>

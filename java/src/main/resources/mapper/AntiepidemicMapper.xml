@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ustb.evaluation.mod06.mapper.AntiepidemicMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ustb.evaluation.mod06.pojo.Antiepidemic">
+        <id column="id" property="id"/>
+        <result column="fstudent_id" property="fstudentId"/>
+        <result column="fin_campus" property="finCampus"/>
+        <result column="flocation" property="flocation"/>
+        <result column="fleave_time" property="fleaveTime"/>
+        <result column="fhealth_id" property="fhealthId"/>
+        <result column="fhealth_memo" property="fhealthMemo"/>
+        <result column="fstatus_id" property="fstatusId"/>
+        <result column="fvaccin_completed" property="fvaccinCompleted"/>
+        <result column="fvaccin_memo" property="fvaccinMemo"/>
+        <result column="fjourney" property="fjourney"/>
+        <result column="memo" property="memo"/>
+    </resultMap>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="AntiepidemicVO" type="com.ustb.evaluation.mod06.VO.AntiepidemicVO">
+        <id column="id" property="id"/>
+        <result column="fstudent_id" property="fstudentId"/>
+        <result column="fin_campus" property="finCampus"/>
+        <result column="flocation" property="flocation"/>
+        <result column="fleave_time" property="fleaveTime"/>
+        <result column="fhealth_id" property="fhealthId"/>
+        <result column="fhealth_memo" property="fhealthMemo"/>
+        <result column="fstatus_id" property="fstatusId"/>
+        <result column="fvaccin_completed" property="fvaccinCompleted"/>
+        <result column="fvaccin_memo" property="fvaccinMemo"/>
+        <result column="fjourney" property="fjourney"/>
+        <result column="memo" property="memo"/>
+
+        <result column="fcode" property="fcode"/>
+        <result column="fname" property="fname"/>
+        <result column="fstatus_name" property="fstatusName"/>
+        <result column="fhealth" property="fhealth"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, fstudent_id, fin_campus, flocation, fleave_time, fhealth_id, fhealth_memo, fstatus_id, fvaccin_completed, fvaccin_memo, fjourney, memo
+    </sql>
+
+    <!--    List<AntiepidemicVO> selectAntiepidemic();-->
+    <select id="selectAntiepidemic" resultMap="AntiepidemicVO">
+        select a.id,
+               a.fstudent_id,
+               a.fin_campus,
+               a.flocation,
+               a.fleave_time,
+               a.fhealth_id,
+               a.fhealth_memo,
+               a.fstatus_id,
+               a.fvaccin_completed,
+               a.fvaccin_memo,
+               a.fjourney,
+               a.memo,
+               b.fname,
+               b.fcode,
+               c.fhealth,
+               d.fstatus_name
+        from stu_antiepidemic a
+                 left join stu_student b
+                           on a.fstudent_id = b.id
+                 left join dic_healthgrade c
+                           on a.fhealth_id = c.fhealth_id
+                 left join dic_healthstatus d
+                           on a.fstatus_id = d.fstatus_id
+    </select>
+    <!--    List<AntiepidemicVO> searchAntiepidemic(String search);-->
+    <select id="searchAntiepidemic" resultMap="AntiepidemicVO">
+        select a.id,
+               a.fstudent_id,
+               a.fin_campus,
+               a.flocation,
+               a.fleave_time,
+               a.fhealth_id,
+               a.fhealth_memo,
+               a.fstatus_id,
+               a.fvaccin_completed,
+               a.fvaccin_memo,
+               a.fjourney,
+               a.memo,
+               b.fname,
+               b.fcode,
+               c.fhealth,
+               d.fstatus_name
+        from stu_antiepidemic a
+                 left join stu_student b
+                           on a.fstudent_id = b.id
+                 left join dic_healthgrade c
+                           on a.fhealth_id = c.fhealth_id
+                 left join dic_healthstatus d
+                           on a.fstatus_id = d.fstatus_id
+                 where b.fcode like %#{search}%
+    </select>
+</mapper>
